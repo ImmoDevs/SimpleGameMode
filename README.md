@@ -56,15 +56,15 @@
 
 Customize the success messages in `config.yml`:
 ```yaml
-# Configuration for SimpleGameMode Plugin
+# Configuration for SimpleGamemode Plugin
 
 # Messages to display when a player's gamemode is changed
 messages:
   # Message sent to the command sender when they successfully change another player's gamemode
-  player-gamemode-change: "Successfully changed {player}'s gamemode to {gamemode}."
+  player-gamemode-change: "§f[§cSimpleGameMode§f] §6You have §aSuccessfully changed §{player}'s §6gamemode §fto §{gamemode}."
   
   # Message sent to the player when they change their own gamemode
-  personal-gamemode-change: "Gamemode changed to {gamemode}."
+  personal-gamemode-change: "§f[§cSimpleGameMode§f] §6Your gamemode has been changed to §c{gamemode}."
 
 ```
 
