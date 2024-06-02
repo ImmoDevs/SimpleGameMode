@@ -72,15 +72,15 @@ messages:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YourUsername/SimpleGamemode.git
+   git clone https://github.com/ImmoDevs/SimpleGameMode.git
    ```
 2. Navigate to the plugin directory:
    ```bash
-   cd SimpleGamemode
+   cd SimpleGameMode
    ```
 3. Compile the plugin into a `.phar` file:
    ```bash
-   zip -r SimpleGamemode.phar . -x "*.git*" -x "*.md" -x "tests/*"
+   zip -r SimpleGameMode.phar . -x "*.git*" -x "*.md" -x "tests/*"
    ```
 
 ## 🤝 Contributing
