@@ -1,0 +1,39 @@
+name: SimpleGameMode
+main: ImmoDevs\SimpleGameMode\Main
+version: 1.0.0
+api: [5.0.0]
+author: ImmoDevs
+website: https://github.com/SimpleGameMode
+description: A simple plugin to change gamemodes with shorter commands.
+
+commands:
+  gmc:
+    description: Change to Creative mode.
+    usage: /gmc [player]
+    permission: simplegamemode.gmc
+  gms:
+    description: Change to Survival mode.
+    usage: /gms [player]
+    permission: simplegamemode.gms
+  gma:
+    description: Change to Adventure mode.
+    usage: /gma [player]
+    permission: simplegamemode.gma
+  gmsp:
+    description: Change to Spectator mode.
+    usage: /gmsp [player]
+    permission: simplegamemode.gmsp
+
+permissions:
+  simplegamemode.gmc:
+    description: Allows the use of /gmc command.
+    default: op
+  simplegamemode.gms:
+    description: Allows the use of /gms command.
+    default: op
+  simplegamemode.gma:
+    description: Allows the use of /gma command.
+    default: op
+  simplegamemode.gmsp:
+    description: Allows the use of /gmsp command.
+    default: op
