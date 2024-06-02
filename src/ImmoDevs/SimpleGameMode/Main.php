@@ -8,7 +8,6 @@ use pocketmine\player\GameMode;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
-use pocketmine\lang\Translatable;
 
 class Main extends PluginBase {
 
@@ -32,28 +31,17 @@ class Main extends PluginBase {
             $sender->sendMessage(TextFormat::RED . "You do not have permission to use this command.");
             return false;
         }
-        
-        if (count($args) < 1) {
-            $sender->sendMessage(TextFormat::RED. "Usage: /". $command->getName(). " <gamemode>");
-            return false;
-        }
-        
-        if (!$sender instanceof Player && count($args) === 0) {
-            $sender->sendMessage(TextFormat::RED. "This command can only be used in-game or with a player/selector.");
-            return false;
-        }
 
-        $targetPlayers = [$sender];
-        if (count($args) > 0) {
+        if ($sender instanceof Player && count($args) === 0) {
+            $targetPlayers = [$sender];
+        } elseif (count($args) > 0) {
             $targetPlayers = $this->resolvePlayer($sender, $args[0]);
-            if(empty($targetPlayers)) {
+            if (empty($targetPlayers)) {
                 $sender->sendMessage(TextFormat::RED . "No players matched the given selector.");
                 return false;
             }
-        } elseif ($sender instanceof Player) {
-            $targetPlayers = [$sender];
         } else {
-            $sender->sendMessage(TextFormat::RED . "You must  specify a player or selector when using this command from console.");
+            $sender->sendMessage(TextFormat::RED . "You must specify a player or selector when using this command from console.");
             return false;
         }
 
@@ -75,7 +63,7 @@ class Main extends PluginBase {
             if ($sender !== $player) {
                 $senderMessage = str_replace(
                     ["{player}", "{gamemode}"],
-                    [$player->getName(), $this->getGamemodeName($gamemode)],
+                    [$player->getName(), $this->getGameModeName($gamemode)],
                     $this->configMessages["player-gamemode-change"]
                 );
                 $sender->sendMessage($senderMessage);
@@ -89,8 +77,6 @@ class Main extends PluginBase {
     {
         $server = $this->getServer();
         switch ($selector) {
-            case "all":
-                return $server->getOnlinePlayers();
             case "@a":
                 return $server->getOnlinePlayers();
             case "@s":
