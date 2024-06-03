@@ -17,12 +17,6 @@ class Main extends PluginBase {
     {
         $this->saveDefaultConfig();
         $this->configMessages = $this->getConfig()->get("messages", []);
-        $this->getLogger()->info(TextFormat::GREEN . "SimpleGameMode By ImmoDevs enabled");
-    }
-
-    public function onDisable(): void
-    {
-        $this->getLogger()->info(TextFormat::RED . "SimpleGameMode By ImmoDevs disabled");
     }
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
@@ -59,7 +53,7 @@ class Main extends PluginBase {
 
         foreach ($targetPlayers as $player) {
             $player->setGamemode($gamemode);
-            $player->sendMessage($this->configMessages["personal-gamemode-change"]);
+            $player->sendMessage(str_replace("{gamemode}", $this->getGameModeName($gamemode), $this->configMessages["personal-gamemode-change"]));
             if ($sender !== $player) {
                 $senderMessage = str_replace(
                     ["{player}", "{gamemode}"],
@@ -76,13 +70,14 @@ class Main extends PluginBase {
     private function resolvePlayer(CommandSender $sender, string $selector): array
     {
         $server = $this->getServer();
+        $selector = strtolower($selector);
+
         switch ($selector) {
             case "@a":
                 return $server->getOnlinePlayers();
             case "@s":
                 return [$sender];
             default:
-                $selector = strtolower($selector);
                 $matchedPlayers = [];
                 foreach ($server->getOnlinePlayers() as $player) {
                     if (strpos(strtolower($player->getName()), $selector) === 0) {
